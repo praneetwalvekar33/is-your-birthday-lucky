@@ -6,9 +6,21 @@ const checkButton = document.querySelector(".check-button");
 checkButton.addEventListener("click",()=>{
     const birthdayDate = inputBirthdayDate.value
     const favouriteNumber = inputFavouriteNumber.value;
+
+    const message = document.querySelector(".output-message");
+
+    if(birthdayDate=="" && favouriteNumber==""){
+        message.innerHTML="Please enter your Birthday date and favourite number";
+    }else if(birthdayDate==""){
+        message.innerHTML = "Please enter your Birthday date.";
+        return;
+    }else if(favouriteNumber==""){
+        message.innerHTML = "Please enter your favourite number.";
+        return;
+    }
     const intBirthdayDate = convertDateStringToNumber(birthdayDate);
     const sumOfDate = sumOfDigits(intBirthdayDate);
-    const message = document.querySelector(".output-message");
+   
     if(sumOfDate%favouriteNumber==0){
         message.innerHTML = ""+favouriteNumber+" is lucky";
     }else{
