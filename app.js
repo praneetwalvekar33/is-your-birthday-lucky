@@ -9,22 +9,25 @@ checkButton.addEventListener("click",()=>{
 
     const message = document.querySelector(".output-message");
 
+    hideMessage(message);
+
     if(birthdayDate=="" && favouriteNumber==""){
-        message.innerHTML="Please enter your Birthday date and favourite number";
+        showMessage(message, "Please enter your Birthday date and favourite number.", 0);
+        return;
     }else if(birthdayDate==""){
-        message.innerHTML = "Please enter your Birthday date.";
+        showMessage(message, "Please enter your Birthday date.", 0);
         return;
     }else if(favouriteNumber==""){
-        message.innerHTML = "Please enter your favourite number.";
+        showMessage(message, "Please enter your favourite number.", 0);
         return;
     }
     const intBirthdayDate = convertDateStringToNumber(birthdayDate);
     const sumOfDate = sumOfDigits(intBirthdayDate);
    
     if(sumOfDate%favouriteNumber==0){
-        message.innerHTML = ""+favouriteNumber+" is lucky";
+        showMessage(message, ""+favouriteNumber+" is lucky", 1);
     }else{
-        message.innerHTML = ""+favouriteNumber +" is not so lucky";
+        showMessage(message, ""+favouriteNumber +" is not so lucky", 2);
     }
 });
 
@@ -42,6 +45,28 @@ function sumOfDigits(numDate){
         num = parseInt(num/10); 
     }
     return parseInt(sum);
+}
+
+function showMessage(message, messageText, messageType){
+    message.innerHTML = messageText;
+    message.style.display = "block";
+    message.style.color = "#f7fafc";
+    message.style.textAlign = "center";
+    message.style.fontSize = "large";
+    message.style.padding = "0.5rem";
+    message.style.borderRadius = "1rem";
+    message.style.fontWeight = "bold";
+    if(messageType == 1){
+        message.style.backgroundColor = "#0891b2";
+    }else if(messageType == 2){
+        message.style.backgroundColor = "#0891b2";
+    }else{
+        message.style.backgroundColor = "#dc2626";
+    }
+}
+
+function hideMessage(message){
+    message.style.display = "none";
 }
 
 console.log("Able to connect to html")
